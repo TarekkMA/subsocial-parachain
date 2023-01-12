@@ -71,7 +71,10 @@ pallet-vesting = { git = "https://github.com/paritytech/substrate", default-feat
 pallet-utility = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.24" }
 pallet-randomness-collective-flip = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.24" }
 
-# Polkadot
+# Polkadot / XCM
+orml-traits = { git = "https://github.com/open-web3-stack/open-runtime-module-library", default-features = false, branch = "polkadot-v0.9.24"}
+orml-xcm-support = { git = "https://github.com/open-web3-stack/open-runtime-module-library", default-features = false, branch = "polkadot-v0.9.24" }
+orml-xtokens = { git = "https://github.com/open-web3-stack/open-runtime-module-library", default-features = false,  branch = "polkadot-v0.9.24" }
 pallet-xcm = { git = "https://github.com/paritytech/polkadot", default-features = false, branch = "release-v0.9.24" }
 polkadot-parachain = { git = "https://github.com/paritytech/polkadot", default-features = false, branch = "release-v0.9.24" }
 polkadot-runtime-common = { git = "https://github.com/paritytech/polkadot", default-features = false, branch = "release-v0.9.24" }
@@ -157,6 +160,7 @@ std = [
 	"pallet-space-follows/std",
 	"pallet-space-ownership/std",
 	"pallet-spaces/std",
+	"orml-xtokens/std",
 ]
 
 runtime-benchmarks = [

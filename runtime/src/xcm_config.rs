@@ -1,6 +1,6 @@
 use super::{
     AccountId, Balances, Call, Event, Origin, ParachainInfo, ParachainSystem, PolkadotXcm, Runtime,
-    WeightToFee, XcmpQueue,
+    WeightToFee, XcmpQueue, RuntimeEvent,
 };
 use core::marker::PhantomData;
 use frame_support::{
@@ -20,6 +20,7 @@ use xcm_builder::{
     UsingComponents,
 };
 use xcm_executor::{traits::ShouldExecute, XcmExecutor};
+use crate::Balance;
 
 parameter_types! {
 	pub const RelayLocation: MultiLocation = MultiLocation::parent();
@@ -217,4 +218,22 @@ impl pallet_xcm::Config for Runtime {
 impl cumulus_pallet_xcm::Config for Runtime {
     type Event = Event;
     type XcmExecutor = XcmExecutor<XcmConfig>;
+}
+
+
+impl orml_xtokens::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type Balance = Balance;
+    type CurrencyId = CurrencyId;
+    type CurrencyIdConvert = CurrencyIdConvert;
+    type AccountIdToMultiLocation = AccountIdToMultiLocation;
+    type SelfLocation = SelfLocation;
+    type XcmExecutor = XcmExecutor<XcmConfig>;
+    type Weigher = FixedWeightBounds<UnitWeightCost, RuntimeCall, MaxInstructions>;
+    type BaseXcmWeight = BaseXcmWeight;
+    type LocationInverter = LocationInverter<Ancestry>;
+    type MaxAssetsForTransfer = MaxAssetsForTransfer;
+    type MinXcmFee = ParachainMinFee;
+    type MultiLocationsFilter = Everything;
+    type ReserveProvider = AbsoluteReserveProvider;
 }
