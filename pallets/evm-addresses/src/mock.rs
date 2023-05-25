@@ -122,14 +122,9 @@ impl pallet_transaction_payment::Config for Test {
     type FeeMultiplierUpdate = ();
 }
 
-parameter_types! {
-    pub static MaxLinkedAccounts: u32 = 1;
-}
-
 impl pallet_evm_accounts::Config for Test {
     type RuntimeEvent = RuntimeEvent;
     type RuntimeCall = RuntimeCall;
-    type MaxLinkedAccounts = MaxLinkedAccounts;
 }
 
 pub(crate) fn account(id: AccountId) -> AccountId {
@@ -146,25 +141,16 @@ pub(crate) fn set_native_balance(id: AccountId, balance: Balance) {
     let _ = pallet_balances::Pallet::<Test>::make_free_balance_be(&id, balance);
 }
 
-pub struct ExtBuilder {
-    pub(crate) max_linked_accounts: u32,
-}
+pub struct ExtBuilder {}
 
 impl Default for ExtBuilder {
     fn default() -> Self {
-        ExtBuilder { max_linked_accounts: 1 }
+        ExtBuilder {}
     }
 }
 
 impl ExtBuilder {
-    pub(crate) fn max_linked_accounts(mut self, max_linked_accounts: u32) -> Self {
-        self.max_linked_accounts = max_linked_accounts;
-        self
-    }
-
-    fn set_configs(&self) {
-        MAX_LINKED_ACCOUNTS.with(|x| *x.borrow_mut() = self.max_linked_accounts);
-    }
+    fn set_configs(&self) {}
 
     pub(crate) fn build(self) -> TestExternalities {
         self.set_configs();

@@ -38,9 +38,6 @@ pub mod pallet {
             + From<frame_system::Call<Self>>
             + IsSubType<Call<Self>>
             + IsType<<Self as frame_system::Config>::RuntimeCall>;
-
-        /// The max number of substrate accounts that are linked to a given evm address.
-        type MaxLinkedAccounts: Get<u32>;
     }
 
     const STORAGE_VERSION: StorageVersion = StorageVersion::new(0);
