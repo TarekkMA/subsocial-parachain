@@ -30,7 +30,7 @@ impl<T: Config> Pallet<T> {
     }
 
     /// Constructs the message that Ethereum RPC's `personal_sign` and `eth_sign` would sign.
-    fn eth_signable_message(sub_address: &T::AccountId, sub_nonce: T::Index) -> Vec<u8> {
+    pub (crate) fn eth_signable_message(sub_address: &T::AccountId, sub_nonce: T::Index) -> Vec<u8> {
         let addr = hex::encode(sub_address.encode());
         let nonce = format!("{:?}", sub_nonce);
         let l = MSG_PART_1.len() + addr.len() + MSG_PART_2.len() + nonce.len();
@@ -41,8 +41,8 @@ impl<T: Config> Pallet<T> {
     }
 }
 
-//* ONLY FOR TESTS *//
-/*
+//* ONLY FOR TESTS AND BENCHMARKS *//
+
 pub(crate) type MessageHash = [u8; 32];
 
 #[cfg(any(feature = "runtime-benchmarks", feature = "std"))]
@@ -73,4 +73,3 @@ pub fn evm_sign(secret: &libsecp256k1::SecretKey, msg_hash: &MessageHash) -> Ecd
     r[64] = recovery_id.serialize();
     r
 }
-*/
