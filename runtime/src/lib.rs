@@ -729,7 +729,6 @@ impl pallet_energy::Config for Runtime {
 impl pallet_evm_addresses::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 	type RuntimeCall = RuntimeCall;
-	type MaxLinkedAccounts = ConstU32<256>;
 }
 
 // impl TryInto<pallet_evm_accounts::Call<Runtime>> for RuntimeCall {
