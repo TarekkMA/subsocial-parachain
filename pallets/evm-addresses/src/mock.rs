@@ -124,7 +124,7 @@ impl pallet_transaction_payment::Config for Test {
 
 impl pallet_evm_accounts::Config for Test {
     type RuntimeEvent = RuntimeEvent;
-    type RuntimeCall = RuntimeCall;
+    type WeightInfo = ();
 }
 
 pub(crate) fn account(id: AccountId) -> AccountId {

@@ -727,6 +727,7 @@ impl pallet_energy::Config for Runtime {
 
 impl pallet_evm_addresses::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
+	type WeightInfo = pallet_evm_addresses::weights::SubstrateWeight<Runtime>;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
@@ -813,6 +814,7 @@ mod benches {
 		[pallet_spaces, Spaces]
 		[pallet_posts, Posts]
 		[pallet_free_proxy, FreeProxy]
+		[pallet_evm_addresses, EvmAddresses]
 	);
 }
 
