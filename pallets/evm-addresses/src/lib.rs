@@ -80,11 +80,7 @@ pub mod pallet {
     impl<T: Config> Pallet<T> {
         /// Link substrate address to EVM address.
         #[pallet::call_index(0)]
-        // FIXME: put here at least something near real weights
-        #[pallet::weight(
-            Weight::from_ref_time(300_000_000)
-                .saturating_add(T::DbWeight::get().reads_writes(2, 2))
-        )]
+        #[pallet::weight(< T as Config >::WeightInfo::link_evm_address())]
         pub fn link_evm_address(
             origin: OriginFor<T>,
             evm_address: EvmAddress,
